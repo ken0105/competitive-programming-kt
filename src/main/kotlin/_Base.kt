@@ -1,9 +1,5 @@
 fun main() {
-<<<<<<< HEAD
-    printArgs("hoge")
-=======
 
->>>>>>> Initiral Commit
 }
 
 private fun next(): String = readLine()!!
