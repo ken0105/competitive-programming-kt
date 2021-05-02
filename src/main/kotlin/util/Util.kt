@@ -11,7 +11,10 @@ class Util {
                 } else {
                     pow(base * base % mod, exp shr 1, mod) * pow(base, exp and 1, mod) % mod
                 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> Initiral Commit
         }
     }
 
