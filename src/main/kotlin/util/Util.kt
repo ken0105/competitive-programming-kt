@@ -1,19 +1,6 @@
 package util
 
 class Util {
-    fun pow(base: Long, exp: Int, mod: Long? = null): Long {
-        return when (exp) {
-            0 -> 1L
-            1 -> base
-            else ->
-                if (mod == null) {
-                    pow(base * base, exp shr 1) * pow(base, exp and 1)
-                } else {
-                    pow(base * base % mod, exp shr 1, mod) * pow(base, exp and 1, mod) % mod
-                }
-        }
-    }
-
     private fun isPrime(num: Int): Boolean {
         for (i in 2..num) {
             if (i * i > num) break

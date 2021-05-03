@@ -1,4 +1,5 @@
 fun main() {
+
 }
 
 private fun next(): String = readLine()!!
@@ -18,4 +19,17 @@ private fun <T> println(vararg args: T) {
     val str = mutableListOf<String>()
     args.forEach { str.add(it.toString()) }
     printList(str)
+}
+
+private fun pow(base: Long, exp: Int, mod: Long? = null): Long {
+    return when (exp) {
+        0 -> 1L
+        1 -> base
+        else ->
+            if (mod == null) {
+                pow(base * base, exp shr 1) * pow(base, exp and 1)
+            } else {
+                pow(base * base % mod, exp shr 1, mod) * pow(base, exp and 1, mod) % mod
+            }
+    }
 }
