@@ -1,5 +1,8 @@
 package util
 
+import java.lang.Long.max
+import java.lang.Long.min
+
 class Util {
     private fun isPrime(num: Int): Boolean {
         for (i in 2..num) {
@@ -9,17 +12,33 @@ class Util {
         return true
     }
 
-    private fun gcd(x: Int, y: Int): Int {
-        var a: Int = Integer.max(x, y)
-        var b: Int = Integer.min(x, y)
-        while (a % b != 0) {
+    private fun <T> gcd(x: T, y: T): Long {
+        when (x) {
+            is Int -> x.toLong()
+            is Double -> x.toLong()
+        }
+        when (y) {
+            is Int -> y.toLong()
+            is Double -> y.toLong()
+        }
+        var a = max(x as Long, y as Long)
+        var b = min(x, y)
+        while (a % b != 0L) {
             a = b.also { b = a % b }
         }
         return b
     }
 
-    private fun lcm(x: Int, y: Int): Int {
-        return x * y / gcd(x, y)
+    private fun <T> lcm(x: T, y: T): Long {
+        when (x) {
+            is Int -> x.toLong()
+            is Double -> x.toLong()
+        }
+        when (y) {
+            is Int -> y.toLong()
+            is Double -> y.toLong()
+        }
+        return x as Long * y as Long / gcd(x, y)
     }
 
     private fun ncr(n: Int, r: Int): Int {
