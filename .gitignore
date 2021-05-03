@@ -1,9 +1,6 @@
-/src/main/kotlin/A.kt
-/src/main/kotlin/B.kt
-/src/main/kotlin/C.kt
-/src/main/kotlin/D.kt
-/src/main/kotlin/E.kt
-/src/main/kotlin/F.kt
+/src/main/kotlin/[A-Z].kt
 /.gradle/
 /build/
 /test/
+/jar/
+/out/*

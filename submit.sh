@@ -7,15 +7,19 @@ fi
 contest=$1
 type=$2
 upper_type=${type:u}
-param=$3
+point=$3
 src_dir=./src/main/kotlin/
+archive_name=Test.jar
 oj d https://atcoder.jp/contests/$contest/tasks/${contest}_${type}
 
-kotlinc ${src_dir}${upper_type}.kt
-mv ${upper_type}Kt.class ./class/
+kotlinc ${src_dir}${upper_type}.kt -include-runtime -d ${archive_name}
+mv ${archive_name} ./jar/
 
-#oj t -e 1e-6 -c "kotlin -classpath ./class ${upper_type}Kt" | grep "FAILURE"
-oj t -c "kotlin -classpath ./class ${upper_type}Kt" | grep "FAILURE"
+if [ -z "$point" ]; then
+  oj t -c "kotlin ./jar/${archive_name}" | grep "FAILURE"
+else
+  oj t -e 1e-${point} -c "kotlin ./jar/${archive_name}" | grep "FAILURE"
+fi
 
 if [ $? = 0 ];then
   echo "テストエラー"
@@ -24,8 +28,4 @@ else
   echo "テスト成功"
 fi
 
-if [ -n "$param" ] && [ $param = "test" ];then
-  return
-fi
-
-oj s https://atcoder.jp/contests/${contest}/tasks/${contest}_${type} ${src_dir}${upper_type}.kt
+oj s --yes https://atcoder.jp/contests/${contest}/tasks/${contest}_${type} ${src_dir}${upper_type}.kt
